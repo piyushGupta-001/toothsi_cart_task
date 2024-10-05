@@ -133,6 +133,7 @@ function ProductList() {
             type="checkbox"
             key={row.id}
             id={row.id}
+            disabled={quantity[row.id - 1].qty < 1}
             onChange={() => {
               if (quantity[row.id - 1].qty < 1) {
                 showAlert(
