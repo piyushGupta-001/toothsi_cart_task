@@ -124,29 +124,44 @@ function ProductList() {
             }}
             className="btn btn-dark me-2"
             onClick={() => {
-              if (quantity[row.id - 1].qty < 1)
+              // This onClick handler is now tied to the checkbox
+            }}
+          >
+            <i className="fa-solid fa-cart-shopping fa-xs"></i>
+          </button>
+          <input
+            type="checkbox"
+            key={row.id}
+            id={row.id}
+            onChange={() => {
+              if (quantity[row.id - 1].qty < 1) {
                 showAlert(
                   "Product quantity should be greater than 0",
                   "alert-danger"
                 );
-              else if (quantity[row.id - 1].qty > row.totalAvailableQuantity)
+                return; // Don't add to cart if quantity is invalid
+              } else if (
+                quantity[row.id - 1].qty > row.totalAvailableQuantity
+              ) {
                 showAlert(
                   "Specified quantity of product is not available",
                   "alert-danger"
                 );
-              else if (!document.getElementById(row.id).checked)
-                showAlert("Checkbox must be checked", "alert-danger");
-              else if (items.some((item) => item["id"] === row.id)) {
+                return; // Don't add to cart if quantity is invalid
+              }
+
+              if (items.some((item) => item["id"] === row.id)) {
                 let itemIndex = items.findIndex((x) => x.id === row.id);
                 if (
                   quantity[row.id - 1].qty >
                   items[itemIndex]["updatedAvailableQuantity"]
-                )
+                ) {
                   showAlert(
                     "Specified quantity of product is not available",
                     "alert-danger"
                   );
-                else {
+                  return; // Don't add to cart if quantity is invalid
+                } else {
                   updateItem(row.id, {
                     quantity:
                       items[itemIndex]["quantity"] + quantity[row.id - 1].qty,
@@ -158,7 +173,6 @@ function ProductList() {
                     "Product quantity updated in cart",
                     "alert-success"
                   );
-                  document.getElementById(row.id).checked = false;
                 }
               } else {
                 addItem(
@@ -173,13 +187,9 @@ function ProductList() {
                   quantity[row.id - 1].qty
                 );
                 showAlert("Product added to cart", "alert-success");
-                document.getElementById(row.id).checked = false;
               }
             }}
-          >
-            <i className="fa-solid fa-cart-shopping fa-xs"></i>
-          </button>
-          <input type="checkbox" key={row.id} id={row.id} />
+          />
         </>
       ),
     },
