@@ -107,11 +107,10 @@ function ProductList() {
             type="number"
             value={quantity[row.id - 1].qty}
             onChange={(event) => {
+              let inputValue = parseInt(event.target.value);
               let updatedQty = [...quantity];
               updatedQty[row.id - 1].qty =
-                isNaN(event.target.value) || !event.target.value
-                  ? 0
-                  : parseInt(event.target.value);
+                isNaN(inputValue) || inputValue < 0 ? 0 : inputValue;
               setQuantity(updatedQty);
             }}
           />
@@ -133,7 +132,10 @@ function ProductList() {
             type="checkbox"
             key={row.id}
             id={row.id}
-            disabled={quantity[row.id - 1].qty < 1}
+            disabled={
+              quantity[row.id - 1].qty < 1 ||
+              row.totalAvailableQuantity <= quantity[row.id - 1].qty 
+            }
             onChange={() => {
               if (quantity[row.id - 1].qty < 1) {
                 showAlert(
