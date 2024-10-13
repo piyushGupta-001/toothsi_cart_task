@@ -1,0 +1,74 @@
+/* Make the table responsive for small screens */
+@media (max-width: 768px) {
+  .dataTable {
+    width: 100% !important;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .dataTable .rdt_Table {
+    display: block;
+  }
+
+  .dataTable th,
+  .dataTable td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .dataTable th {
+    display: block;
+  }
+
+  /* Stack the form controls vertically */
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .form-select {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .alert {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .dataTable th,
+  .dataTable td {
+    font-size: 12px;
+  }
+}
+
+/* For very small mobile screens (like below 480px) */
+@media (max-width: 480px) {
+  .dataTable th,
+  .dataTable td {
+    font-size: 10px;
+  }
+/* 
+  .form-control {
+    font-size: 12px;
+  } */
+
+  .btn {
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .dataTable th,
+  .dataTable td {
+    padding: 6px;
+  }
+}
