@@ -107,9 +107,26 @@ const Cart = () => {
       ></div>
       <div
         className="container mt-3"
-        style={{ display: "flex", flexDirection: "row" }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
       >
-        <DataTable columns={columns} data={items} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            overflow: "hidden",
+            padding: "10px",
+          }}
+        >
+          <DataTable columns={columns} data={items} />
+        </div>
+
         <div
           className="ms-2 mt-3 p-2"
           style={{
